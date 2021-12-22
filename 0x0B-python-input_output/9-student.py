@@ -1,27 +1,16 @@
 #!/usr/bin/python3
 """
-Module 9-add_item
-Contains function that adds and saves to Python obj to JSON file; loads objects
-# run with ./9-add_item.py
-#
-# cat add_item.json ; echo ""
-# expect output: []
-#
-# ./9-add_item.py some random args
-# cat add_item.json ; echo ""
-# expect output: ["some", "random", "args"]
+9-student module
 """
 
 
-from sys import argv
-save_to_json_file = __import__('7-save_to_json_file').save_to_json_file
-load_from_json_file = __import__('8-load_from_json_file').load_from_json_file
+class Student:
+    def __init__(self, first_name, last_name, age):
+        """Initializes the Student instance."""
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
 
-filename = "add_item.json"
-
-try:
-    existing_content = load_from_json_file(filename)
-except FileNotFoundError:
-    existing_content = []
-
-save_to_json_file(existing_content + argv[1:], filename)
+    def to_json(self):
+        """dictionary representation of a Student instance"""
+        return self.__dict__

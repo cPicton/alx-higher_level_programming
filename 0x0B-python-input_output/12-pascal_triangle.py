@@ -1,44 +1,25 @@
 #!/usr/bin/python3
 """
-Module 12-student
-Contains class Student
-that initializes public instance attributes first_name, last_name, and age,
-and has public method to_json that returns dictionary representation
-of requested attributes or all if none were requested
+pascal's triangle
 """
 
 
-class Student():
+def pascal_triangle(n):
     """
-    Public Attributes:
-        first_name
-        last_name
-        age
-    Public Methods:
-        to_json: retrieves its dictionary representation
+    Returns the pascal triangle of n.
     """
-    def __init__(self, first_name, last_name, age):
-        """
-        Initializes student with full name and age
-        """
-        self.first_name = first_name
-        self.last_name = last_name
-        self.age = age
 
-    def to_json(self, attrs=None):
-        """
-        Returns dictionary description with simple data structure
-        (list, dictionary, dictionary, string)
-        for JSON serialization of an object
-        Return:
-            Only return dict of attrs given to us
-            Return entire dict if no attrs given
-        """
-        if attrs is None:
-            return self.__dict__
-        else:
-            dic = {}
-            for att in attrs:
-                if att in self.__dict__.keys():
-                    dic[att] = self.__dict__[att]
-            return dic
+    if n <= 0:
+        return []
+
+    x = [[0 for x in range(i + 1)] for i in range(n)]
+    x[0] = [1]
+
+    for i in range(1, n):
+        x[i][0] = 1
+        for j in range(1, i + 1):
+            if j < len(x[i - 1]):
+                x[i][j] = x[i - 1][j - 1] + x[i - 1][j]
+            else:
+                x[i][j] = x[i - 1][0]
+    return x
